@@ -1,4 +1,4 @@
-﻿from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import uuid
 from datetime import datetime, timezone
@@ -13,7 +13,7 @@ def root():
     return jsonify({
         "name": "Lazarus",
         "tagline": "Resurrect dead code with Kiro Crew.",
-        "hackathon": "Kiroween 2026 — Resurrection Category",
+        "hackathon": "Kiroween 2026 � Resurrection Category",
         "docs": "/docs"
     })
 
