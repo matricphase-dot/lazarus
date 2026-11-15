@@ -1,4 +1,0 @@
-# file: /home/user/kiroween-submission/app/main.py
-# hypothesis_version: 6.170.15
-
-[2.4, 7.9, 202, 400, 404, 8000, '*', '/', '/docs', '/health', '/resurrect', '/resurrects', '0.0.0.0', '1.0.0', 'Archivist', 'Embalmer', 'Lazarus', 'Mortician', 'PORT', 'S1', 'S2', 'S4', 'S5', 'Surgeon', '__main__', 'abandonment', 'alive', 'autopsied', 'deprecated_deps', 'docs', 'hackathon', 'https://github.com/', 'ingested', 'kiro_crew', 'name', 'pr-opened', 'ready', 'status', 'surgery', 'tagline', 'testing']
