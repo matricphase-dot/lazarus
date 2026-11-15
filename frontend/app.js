@@ -1,7 +1,7 @@
 // Lazarus frontend — vanilla JS module
 // Calls the FastAPI backend at /resurrect and renders the dashboard.
 
-const API_BASE = window.location.origin; // same-origin by default
+const API_BASE = "https://lazarus-backend-md0x.onrender.com"; // same-origin by default
 const form = document.getElementById("resurrect-form");
 const repoInput = document.getElementById("repo-url");
 const messageEl = document.getElementById("form-message");
