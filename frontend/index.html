@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lazarus — Resurrect Dead Code</title>
+  <meta name="description" content="Kiroween 2026 Resurrection Category — bring dead GitHub repositories back to life with Kiro Crew agents." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-mark">🪦</span>
+        <span class="brand-name">Lazarus</span>
+      </div>
+      <nav class="nav">
+        <a href="#how-it-works">How it works</a>
+        <a href="#resurrect">Resurrect</a>
+        <a href="#dashboard">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="hero">
+    <div class="container hero-inner">
+      <h1>Resurrect <em>dead</em> code.</h1>
+      <p class="subtitle">
+        Bring your favorite abandoned GitHub repository back to life with
+        <strong>Kiro Crew</strong> agents. Spec-driven, agent-powered,
+        open-source resurrection.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#resurrect">Start a Resurrection</a>
+        <a class="btn btn-outline" href="#dashboard">View Dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="category-badge" aria-label="Hackathon category">
+    <div class="container">
+      <span class="badge">Kiroween 2026 &bull; Resurrection Category</span>
+      <span class="badge">Built with Kiro IDE, CLI, Web &amp; Crew</span>
+      <span class="badge">Open source (MIT)</span>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2>The Kiro Crew autopsy</h2>
+      <p class="intro">
+        Four custom agents work through a spec-driven pipeline — no vibe
+        coding, just traced resurrection.
+      </p>
+      <div class="steps" aria-label="Resurrection steps">
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Archivist</h3>
+          <p>Reads the repo tree, README, dependencies, and commit history.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Mortician</h3>
+          <p>Diagnoses cause of death: deprecated deps, CVEs, API breakage.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Surgeon</h3>
+          <p>Applies modernization patches mapped to the resurrection spec.</p>
+        </div>
+        <div class="step">
+          <span class="step-number">4</span>
+          <h3>Embalmer</h3>
+          <p>Adds tests, docs, and a changelog — preserving original spirit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="resurrect" id="resurrect">
+    <div class="container">
+      <h2>Resurrect a repository</h2>
+      <form id="resurrect-form" novalidate>
+        <label for="repo-url">GitHub repository URL</label>
+        <input
+          type="url"
+          id="repo-url"
+          name="repo-url"
+          placeholder="https://github.com/owner/abandoned-repo"
+          required
+          aria-describedby="url-hint"
+        />
+        <span id="url-hint" class="hint">Must be a public GitHub repository.</span>
+        <button type="submit" class="btn btn-primary" id="submit-btn">Resurrect</button>
+      </form>
+      <div id="form-message" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="dashboard" id="dashboard">
+    <div class="container">
+      <h2>Resurrection dashboard</h2>
+      <div class="dashboard-grid" id="dashboard-grid">
+        <!-- Resurrection cards injected here by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        Built for <strong>Kiroween 2026</strong> &bull; Resurrection Category
+        &bull; Deadline Dec 4, 2026 &bull;
+        <a href="https://github.com/YOUR_USERNAME/lazarus">View on GitHub</a>
+      </p>
+      <p class="small">Open source under the MIT License.</p>
+    </div>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lazarus — Demo Showcase | Kiroween 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0a0b0f;
+      color: #c5c6c7;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: #66fcf1; text-decoration: none; }
+    h1,h2,h3 { font-family: "Playfair Display", Georgia, serif; color: #66fcf1; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ============ RECORDER FRAME ============ */
+    .recorder-frame {
+      position: relative;
+      margin: 2rem auto;
+      background: #000;
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8), inset 0 0 0 1px #1f2833;
+      overflow: hidden;
+      max-width: 900px;
+    }
+    .recorder-chrome {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot.red { background: #ff5f56; box-shadow: 0 0 8px #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27ca3f; }
+    .rec-title { font-size: 0.85rem; color: #8b949e; font-family: "Inter", sans-serif; margin-left: auto; }
+    .rec-time { font-size: 0.8rem; color: #8b949e; font-family: "JetBrains Mono", monospace; margin-left: 1rem; }
+
+    /* ============ HERO ============ */
+    .hero {
+      padding: 6rem 0 3rem;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #1f2833;
+      border: 1px solid #3a404d;
+      color: #66fcf1;
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 1rem; letter-spacing: -0.03em; }
+    .hero p { font-size: 1.25rem; color: #959ca4; max-width: 700px; margin: 0 auto 2.5rem; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary { background: #66fcf1; color: #0a0b0f; }
+    .btn-primary:hover { background: #88ffe8; transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: #c5c6c7; border: 1px solid #3a404d; }
+    .btn-ghost:hover { border-color: #66fcf1; color: #66fcf1; }
+
+    /* ============ SHOWCASE SECTIONS ============ */
+    .showcase { padding: 4rem 0; }
+    .showcase h2 { font-size: 2rem; margin-bottom: 1rem; text-align: center; }
+    .showcase p.subtitle { text-align: center; color: #959ca4; margin-bottom: 3rem; }
+
+    /* Step cards */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .step-card {
+      background: #11131c;
+      border: 1px solid #1f2833;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .step-card:hover { border-color: #66fcf1; }
+    .step-num {
+      width: 3rem; height: 3rem;
+      background: #66fcf1; color: #0a0b0f;
+      border-radius: 50%; display: inline-flex;
+      align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1.25rem; margin-bottom: 1rem;
+    }
+    .step-card h3 { margin-bottom: 0.75rem; font-size: 1.1rem; }
+    .step-card p { font-size: 0.9rem; color: #959ca4; }
+
+    /* Before/After */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      align-items: start;
+    }
+    .comp-card {
+      background: #11131c;
+      border: 1px solid #1f2833;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .comp-card.before { border-color: #ff6b6b; }
+    .comp-card.after { border-color: #4ade80; }
+    .comp-card h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+    .comp-card.before h3 { color: #ff6b6b; }
+    .comp-card.after h3 { color: #4ade80; }
+    .health-big { font-size: 4rem; font-family: "JetBrains Mono", monospace; font-weight: 700; margin: 1rem 0; }
+    .health-big.before { color: #ff6b6b; }
+    .health-big.after { color: #4ade80; }
+    .comp-card ul { list-style: none; color: #959ca4; font-size: 0.9rem; }
+    .comp-card ul li { margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; }
+    .comp-card ul li::before { content: "▸"; position: absolute; left: 0; color: #66fcf1; }
+
+    /* Code block */
+    .code-block {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 4rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      position: relative;
+    }
+    .code-block::before {
+      content: "// .kiro/specs/resurrection-spec.md";
+      position: absolute; top: -1rem; left: 1rem;
+      background: #0d1117; padding: 0 0.5rem; font-size: 0.75rem; color: #66fcf1;
+    }
+    .code-line { margin-bottom: 0.4rem; }
+    .kw { color: #ff7b72; } .str { color: #a5d6ff; } .cmt { color: #8b949e; }
+
+    /* PR preview */
+    .pr-preview {
+      background: #11131c;
+      border: 1px solid #1f2833;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 4rem;
+    }
+    .pr-header {
+      display: flex; gap: 0.75rem; align-items: center; margin-bottom: 1.5rem;
+    }
+    .pr-avatar { width: 32px; height: 32px; background: #66fcf1; border-radius: 6px; }
+    .pr-meta { font-size: 0.85rem; color: #959ca4; }
+    .pr-meta strong { color: #c5c6c7; }
+    .pr-body { font-size: 0.9rem; color: #c5c6c7; background: #0d1117; padding: 1rem; border-radius: 8px; border-left: 3px solid #66fcf1; }
+
+    /* Kiro stack */
+    .stack {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      justify-content: center; margin-bottom: 4rem;
+    }
+    .stack-pill {
+      background: #1f2833; border: 1px solid #3a404d; color: #66fcf1;
+      padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, #11131c 0%, #0a0b0f 100%);
+      border: 1px solid #3a404d; border-radius: 16px;
+      padding: 4rem 2rem; text-align: center;
+    }
+    .cta h2 { font-size: 2.25rem; margin-bottom: 1rem; }
+    .cta p { color: #959ca4; margin-bottom: 2rem; font-size: 1.1rem; }
+
+    footer { padding: 3rem 0; border-top: 1px solid #1f2833; text-align: center; color: #586069; font-size: 0.9rem; }
+
+    /* Recording hint */
+    .record-hint {
+      position: fixed; top: 1rem; right: 1rem;
+      background: #ff5f56; color: #000; padding: 0.5rem 1rem;
+      border-radius: 6px; font-size: 0.85rem; font-weight: 700;
+      z-index: 100; animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+    @media (max-width: 768px) {
+      .comparison { grid-template-columns: 1fr; }
+      .recorder-frame { margin: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="record-hint">● REC — Screen recording in progress</div>
+
+  <div class="recorder-frame">
+    <div class="recorder-chrome">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <span class="rec-title">Lazarus — Resurrect Dead Code</span>
+      <span class="rec-time">02:14</span>
+    </div>
+
+    <!-- Hero inside frame -->
+    <section class="hero" style="padding: 4rem 0 2rem;">
+      <div class="badge">🪦 Kiroween 2026 • Resurrection Category</div>
+      <h1>Resurrect dead code.</h1>
+      <p>Abandoned GitHub repositories, brought back to life by Kiro Crew agents.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="startDemo()">Start Resurrection</button>
+        <button class="btn btn-ghost">View Dashboard</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="showcase" id="steps">
+    <h2>The Kiro Crew autopsy</h2>
+    <p class="subtitle">Four custom agents work through a spec-driven pipeline — no vibe coding.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Archivist</h3>
+        <p>Reads repo tree, README, dependencies, commit history.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Mortician</h3>
+        <p>Diagnoses cause of death: deprecated deps, CVEs, API breakage.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Surgeon</h3>
+        <p>Applies modernization patches mapped to resurrection spec.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Embalmer</h3>
+        <p>Adds tests, docs, changelog — preserving original spirit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase">
+    <h2>Before → After</h2>
+    <p class="subtitle">Health score jumps as agents modernize the repository.</p>
+    <div class="comparison">
+      <div class="comp-card before">
+        <h3>Before Resurrection</h3>
+        <div class="health-big before">2.4 / 10</div>
+        <ul>
+          <li>Django 1.11 (EOL)</li>
+          <li>3 unpatched CVEs</li>
+          <li>No tests</li>
+          <li>2 years inactive</li>
+        </ul>
+      </div>
+      <div class="comp-card after">
+        <h3>After Lazarus</h3>
+        <div class="health-big after">7.9 / 10</div>
+        <ul>
+          <li>Django 4.2 LTS</li>
+          <li>CVEs patched</li>
+          <li>Pytest suite added</li>
+          <li>PR opened to origin</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase">
+    <h2>Spec-Driven Development</h2>
+    <p class="subtitle">Every agent writes to `/.kiro/specs/` — traceable, not vibe-coded.</p>
+    <div class="code-block">
+      <div class="code-line"><span class="cmt"># S1: Dependency upgrade</span></div>
+      <div class="code-line"><span class="kw">Django</span>: <span class="str">"1.11"</span> → <span class="str">"4.2"</span></div>
+      <div class="code-line"><span class="cmt"># S2: Security patch</span></div>
+      <div class="code-line">CVE-2023-XXXX resolved via middleware</div>
+      <div class="code-line"><span class="cmt"># S4: Test scaffolding</span></div>
+      <div class="code-line"><span class="kw">pytest</span> tests added for core modules</div>
+      <div class="code-line"><span class="cmt"># S5: Documentation</span></div>
+      <div class="code-line">README updated with resurrection badge</div>
+    </div>
+  </section>
+
+  <section class="showcase">
+    <h2>Pull Request Opened</h2>
+    <p class="subtitle">Lazarus opens a PR back to the original repo with full resurrection summary.</p>
+    <div class="pr-preview">
+      <div class="pr-header">
+        <div class="pr-avatar"></div>
+        <div>
+          <div style="font-weight:600;color:#c5c6c7">Lazarus opened a pull request</div>
+          <div class="pr-meta"><strong>owner/abandoned-repo</strong> · <em>resurrect/main</em> → <em>main</em></div>
+        </div>
+      </div>
+      <div class="pr-body">
+        <strong>🪦 Lazarus Resurrection</strong><br><br>
+        Cause of Death: <span class="kw">deprecated_deps</span>, <span class="kw">abandonment</span><br>
+        Spec Sections: <span class="kw">S1</span>, <span class="kw">S2</span>, <span class="kw">S4</span>, <span class="kw">S5</span><br>
+        Health: <span style="color:#ff6b6b">2.4</span> → <span style="color:#4ade80">7.9</span> (+5.5)<br><br>
+        Agents: Archivist, Mortician, Surgeon, Embalmer (Kiro Crew)<br>
+        Built for <span class="kw">Kiroween 2026</span> — Resurrection Category
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase">
+    <div class="stack">
+      <span class="stack-pill">Kiro IDE</span>
+      <span class="stack-pill">Kiro CLI</span>
+      <span class="stack-pill">Kiro Web</span>
+      <span class="stack-pill">Kiro Crew</span>
+      <span class="stack-pill">GitHub MCP</span>
+      <span class="stack-pill">Agent Hooks</span>
+      <span class="stack-pill">Steering Docs</span>
+      <span class="stack-pill">Property-Based Testing</span>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Built to win Kiroween 2026</h2>
+    <p>Resurrection Category • $100,000 in prizes • Deadline Dec 4, 2026</p>
+    <div class="hero-actions" style="justify-content:center;">
+      <button class="btn btn-primary" onclick="window.location.href='https://github.com/YOUR_USERNAME/lazarus'">View on GitHub</button>
+      <button class="btn btn-ghost">Read the Devpost Submission</button>
+    </div>
+  </section>
+
+  <footer>
+    Lazarus • Kiroween 2026 • Open source (MIT) • <span id="year">2026</span>
+  </footer>
+
+  <script>
+    function startDemo() {
+      const btn = document.querySelector('.btn-primary');
+      const original = btn.textContent;
+      btn.textContent = 'Resurrecting…';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = 'PR Opened ✓';
+        btn.style.background = '#4ade80';
+        btn.style.color = '#000';
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.disabled = false;
+          btn.style.background = '#66fcf1';
+          btn.style.color = '#0a0b0f';
+        }, 2000);
+      }, 1800);
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
