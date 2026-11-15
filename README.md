@@ -23,7 +23,7 @@ Lazarus is a working software application that resurrects abandoned, "dead" GitH
 - **Agent Hooks** — Automate test runs and PR creation on spec approval (see `/.kiro/hooks/`).
 - **Steering Docs** — Guide Kiro's responses throughout the build (see `/.kiro/steering/`).
 - **MCP** — GitHub MCP server for repo read/write; Filesystem MCP for local spec/artifact management.
-- **Backend:** Python + FastAPI
+- **Backend:** Python + Flask
 - **Frontend:** Vanilla JS + HTML/CSS (no build step, deployable anywhere)
 - **License:** MIT (visible in GitHub About section)
 
@@ -36,7 +36,7 @@ lazarus/
 │   ├── hooks/                      # Agent hooks (automation)
 │   ├── steering/                   # Steering documents for Kiro
 │   └── agents/                     # Kiro Crew agent definitions
-├── app/                            # FastAPI backend
+├── app/                            # Flask backend
 ├── frontend/                       # Deployable static UI
 ├── README.md
 ├── LICENSE
@@ -55,7 +55,7 @@ cd lazarus
 # Backend
 cd app
 pip install -r requirements.txt
-uvicorn main:app --reload
+gunicorn main:app --host 0.0.0.0 --port \$PORT
 
 # Frontend
 cd ../frontend
